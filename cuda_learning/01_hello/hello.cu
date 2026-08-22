@@ -1,7 +1,8 @@
 #include <cstdio>
 
 __global__ void hello_kernel(){
-    printf("Hello from GPU! block = %d, thread = %d", blockIdx.x, threadIdx.x);
+    int global_id = blockIdx.x * blockDim.x + threadIdx.x;
+    printf("Hello from GPU! global_id=%d\n", global_id);
 }
 
 int main(){
