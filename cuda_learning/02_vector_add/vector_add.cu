@@ -37,9 +37,9 @@ int main(){
 
     // Launch kernel
     constexpr int threads_per_block = 256;
-    int block = (N * threads_per_block - 1) / threads_per_block;
+    int block = (N + threads_per_block - 1) / threads_per_block;
 
-    vector_add<<<2, threads_per_block>>>(d_A, d_B, d_C, N);
+    vector_add<<<block, threads_per_block>>>(d_A, d_B, d_C, N);
 
     cudaDeviceSynchronize();
 
