@@ -9,7 +9,7 @@ __global__ void vector_add(const float* A, const float* B, float* C, size_t N){
 }
 
 int main(){
-    constexpr size_t N = 1024;
+    constexpr size_t N = 1000;
     size_t bytes = N * sizeof(float);
 
     // Host Memory, ???
