@@ -13,9 +13,9 @@ int main(){
     size_t bytes = N * sizeof(float);
 
     // Host Memory, ???
-    float* h_A = static_cast<float>(malloc(bytes));
-    float* h_B = static_cast<float>(malloc(bytes));
-    float* h_C = static_cast<float>(malloc(bytes));
+    float* h_A = static_cast<float*>(malloc(bytes));
+    float* h_B = static_cast<float*>(malloc(bytes));
+    float* h_C = static_cast<float*>(malloc(bytes));
 
     for(size_t i = 0; i < N; ++i){
         h_A[i] = static_cast<float>(i);
