@@ -7,20 +7,22 @@
 
 using namespace runtime;
 
-void testCUDAAllocator();
+void TestCUDAAllocator() {
+
+    CUDAAllocator allocator;
+
+    void* ptr = allocator.Allocate(1024);
+
+    assert(ptr != nullptr);
+
+    allocator.Free(ptr);
+
+    std::cout << "[PASS] CUDAAllocator\n";
+}
 
 int main() {
 
     TestCUDAAllocator();
 
     return 0;
-}
-
-void TestCUDAAllocator() {
-
-    CUDAAllocator allocator;
-    void* ptr = allocator.Allocate(1024);
-    assert(ptr != nullptr);
-    allocator.Free(ptr);
-    std::cout << "[PASS] CUDAAllocator\n";
 }
