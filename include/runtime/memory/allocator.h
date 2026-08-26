@@ -14,22 +14,19 @@ namespace runtime{
     class Allocator{
 
         public:
-            Allocator()  = default;
-            ~Allocator() = default;
-            
-            /**
-             * @brief Allocate a contiguous memory block.
-             * @param bytes Number of bytes to allocate.
-             * @return Pointer to the beginning of the allocated memory.
-             */
-            [[nodiscard]]
-            void* Allocate(size_t bytes) const;
 
-            /**
-             * @brief Release a previously allocated memory block.
-             * @param ptr Pointer returned by Allocate().
-             */
-            void Free(void* ptr) const;
+            // version 1.0
+            // Allocator()  = default;
+            // ~Allocator() = default;
+            // void* Allocate(size_t bytes) const;
+            // void Free(void* ptr) const;
+
+            // version 2.0
+            virtual ~Allocator() = default;
+
+            virtual void* Allocate(size_t bytes) const = 0;
+
+            virtual void Free(void* ptr) const = 0;
 
     };
 

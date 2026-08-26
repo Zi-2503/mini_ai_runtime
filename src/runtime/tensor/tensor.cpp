@@ -2,15 +2,34 @@
 #include "runtime/memory/allocator.h"
 #include "runtime/core/device.h"
 
+#include "runtime/memory/allocator/cpu_allocator.h"
+#include "runtime/memory/allocator/cuda_allocator.h"
+
 #include <algorithm>
 #include <stdexcept>
 #include <memory>
 
-namespace{
-    const runtime::Allocator default_allocator;
-}
+// namespace{
+//     const runtime::Allocator default_allocator;
+// }
 
 namespace runtime{
+
+    namespace {
+
+        CPUAllocator cpu_allocator;
+        CUDAAllocator cuda_allocator;
+
+        const Allocator& GetAllocator(Device device) {
+            switch (device.type()) {
+                case DeviceType::CPU:       return cpu_allocator;
+                case DeviceType::CUDA:      return cuda_allocator;
+                default:                    throw std::runtime_error("Unsupported device.");
+            }
+        }
+
+    }
+
 
     Tensor::Tensor()
         : shape_(),
@@ -29,7 +48,7 @@ namespace runtime{
           device_(device)
         {
             const size_t bytes = shape_.numel() * SizeOf(dtype);
-            storage_ = std::make_shared<Storage>(bytes, default_allocator);
+            storage_ = std::make_shared<Storage>(bytes, GetAllocator(device));
         }
 
     Tensor::Tensor(const Shape& shape, DataType dtype, const std::shared_ptr<Storage>& storage, size_t offset, Stride stride, Device device)
