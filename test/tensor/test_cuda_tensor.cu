@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
 
-#include <cuda_runtime>
+#include <cuda_runtime.h>
 
 #include "runtime/tensor/tensor.h"
 
