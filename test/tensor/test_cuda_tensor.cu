@@ -19,7 +19,7 @@ void testCUDATensor(){
 
     Tensor A(Shape({1024}), DataType::Int32, Device(DeviceType::CUDA));
 
-    assert(A.rank() == 2);
+    assert(A.rank() == 1);
     assert(A.device().type() == DeviceType::CUDA);
     assert(A.dtype() == DataType::Int32);
     assert(A.bytes() == 1024 * sizeof(int));
